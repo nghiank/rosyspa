@@ -1,0 +1,33 @@
+storyjs_jsonp_data = {
+    "timeline":
+    {
+        "headline":"Welcome to RosySpa",
+        "type":"default",
+		"text":"You will enjoy at our outlet",
+		"startDate":"2013,4,17",
+        "date": [
+            {
+                "startDate":"2013,5,26",
+                "headline":"",
+                "text":"<p>In true political fashion, his character rattles off common jargon heard from people running for office.</p>",
+                "asset":
+                {
+                    "media":"images/p/DE_01.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2013,5,20",
+                "headline":"Headline text here",
+                "text":"<p>Text go here</p>",
+                "asset":
+                {
+                    "media":"images/p/DE_03.jpg",
+                    "credit":"Credit is here",
+                    "caption":"Caption came here"
+                }
+            },
+        ]
+    }
+}
