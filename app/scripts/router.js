@@ -4,6 +4,7 @@ define([
   "jquery",
   "vendor/jquery.vion-1.0.min",
   "vendor/jquery.easing.1.3",
+  "vendor/jquery-ui",
   "vendor/TimelineJS/compiled/js/storyjs-embed"
 ],
 
@@ -52,6 +53,68 @@ function(app, jQuery ) {
           })
         }
       });
+      var contactView = Backbone.View.extend({
+        manage: true,
+        template: "contactTemplate",
+        events: {
+          "click #mapLink": "clickMapLink"
+        },
+        afterRender: function()
+        {
+          var self = this;
+          $(document).ready(function(){
+            var lat = 10.770371;
+            var lng = 106.67049;
+            var latlng = new google.maps.LatLng(lat, lng);
+            self.initMap(latlng);
+            $("#map_container" ).dialog({
+                autoOpen:false,
+                modal: true,
+                width:910,
+                height: 610,
+                draggable: false,
+                stack:true,
+                resizeStop: function(event, ui) {
+                  google.maps.event.trigger(self.map, 'resize');
+                  self.map.panTo(latlng);
+                },
+                open: function(event, ui) {
+                  google.maps.event.trigger(self.map, 'resize');
+                  self.map.panTo(latlng);
+                }
+            });
+          });
+        },
+        initMap: function(latlng)
+        {
+          var myOptions = {
+            zoom: 16,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          this.map = new google.maps.Map(document.getElementById("map_canvas"),  myOptions); 
+          this.plotPoint(latlng,'BeRosySpa','<span class="gBubble"><b>Mall of America</b><br>60 East Brodway<br>Bloomington, MN 55425</span>');
+        },
+        plotPoint: function(myLatlng,title,popUpContent,markerIcon)
+        {
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: this.map,
+            title:title
+          });
+          var infowindow = new google.maps.InfoWindow({
+            content: popUpContent
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+          });
+        },
+        clickMapLink: function()
+        {
+           $( "#map_container" ).dialog( "open" );
+           return false;
+        }
+      });
 
       // Create a new Layout.
       var layout = new Backbone.Layout({
@@ -67,6 +130,7 @@ function(app, jQuery ) {
           "#serviceSection": new serviceView(),
           "#productSection": new productView(),
           "#promotionSection": new promotionView(),
+          "#contactSection": new contactView(),
         },
         afterRender:function()
         {

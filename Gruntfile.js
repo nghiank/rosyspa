@@ -38,7 +38,7 @@ module.exports = function( grunt ) {
           javascripts_dir: 'temp/scripts',
           force: true
         }
-      }
+      },
     },
 
     // generate application cache manifest

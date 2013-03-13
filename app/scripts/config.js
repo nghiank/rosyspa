@@ -25,7 +25,8 @@ require.config({
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"],
     "vendor/jquery.vion-1.0.min":["jquery"],
-    "vendor/jquery.easing.1.3":["jquery"]
+    "vendor/jquery.easing.1.3":["jquery"],
+    "vendor/jquery.ui.js": ["jquery"]
   }
 
 });
